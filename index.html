@@ -17,12 +17,12 @@
     --ink-4:#a8a094;
     --line:#e6e1d6;
     --line-2:#efeae0;
-    --accent:#b8453a;
-    --accent-d:#8a2f25;
-    --accent-soft:rgba(184,69,58,.08);
-    --gold:#a8853c;
-    --jade:#5a7a5c;
-    --indigo:#3d5570;
+    --accent:#2c4a5e;
+    --accent-d:#1d3447;
+    --accent-soft:rgba(44,74,94,.08);
+    --gold:#7a6235;
+    --jade:#3e5a44;
+    --indigo:#324a6a;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -75,6 +75,81 @@
   .hero-sub{font-size:18px;color:var(--ink-2);line-height:1.7;font-weight:300;max-width:580px}
   .hero-meta{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);font-family:"Noto Sans SC",sans-serif;font-size:13px;color:var(--ink-3);display:flex;gap:24px;flex-wrap:wrap}
   .hero-meta span b{color:var(--ink);font-weight:500;font-family:"Lora",serif;font-style:italic;margin-right:4px}
+
+  /* ===== Byline (Author tag) ===== */
+  .byline{
+    margin-top:36px;
+    padding:22px 24px;
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-left:4px solid var(--accent);
+    border-radius:0 6px 6px 0;
+    position:relative;
+    transition:box-shadow .3s;
+  }
+  .byline:hover{box-shadow:0 4px 18px rgba(0,0,0,.04)}
+  .byline-label{
+    font-family:"Lora",serif;
+    font-style:italic;
+    font-size:11px;
+    letter-spacing:2.5px;
+    color:var(--accent);
+    text-transform:uppercase;
+    margin-bottom:6px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .byline-label::before{
+    content:'';
+    display:inline-block;
+    width:18px;
+    height:1px;
+    background:var(--accent);
+  }
+  .byline-name{
+    font-family:"Noto Serif SC",serif;
+    font-size:22px;
+    color:var(--ink);
+    font-weight:700;
+    letter-spacing:-.3px;
+    line-height:1.3;
+    margin-bottom:8px;
+    display:flex;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .byline-sep{color:var(--ink-4);font-weight:300;margin:0 4px}
+  .byline-role{
+    font-family:"Lora",serif;
+    font-style:italic;
+    font-size:15px;
+    color:var(--ink-3);
+    font-weight:400;
+    letter-spacing:.5px;
+  }
+  .byline-note{
+    font-size:13.5px;
+    color:var(--ink-2);
+    font-family:"Noto Sans SC",sans-serif;
+    line-height:1.75;
+    margin-top:4px;
+  }
+  .byline-note a{
+    color:var(--accent);
+    text-decoration:none;
+    border-bottom:1px solid var(--accent);
+    padding-bottom:1px;
+    transition:color .2s;
+  }
+  .byline-note a:hover{color:var(--accent-d)}
+  @media(max-width:640px){
+    .byline{margin-top:28px;padding:18px 20px}
+    .byline-name{font-size:19px}
+    .byline-role{font-size:13.5px}
+    .byline-note{font-size:13px}
+  }
 
   /* ===== Section ===== */
   section{padding:60px 0;border-top:1px solid var(--line)}
@@ -550,11 +625,17 @@
   <header class="hero">
     <div class="hero-eyebrow">微信读书 · 2018.01 — 2026.05</div>
     <h1>一个读者的八年</h1>
-    <p class="hero-sub">488 本加入书架，55 本读完，681 条笔记，1041 个阅读日。以下是从这些痕迹里看见的几件事——由一个第三者整理。</p>
+    <p class="hero-sub">488 本加入书架，91 本留下过笔记，681 条划线与想法，1041 个阅读日——以下是从这些痕迹里看见的几件事。</p>
     <div class="hero-meta">
       <span><b>注册</b>2018.01.14</span>
       <span><b>至今</b>2026.05.21</span>
       <span><b>历时</b>3 049 天</span>
+    </div>
+
+    <div class="byline">
+      <div class="byline-label">Portrait by</div>
+      <div class="byline-name">Claude<span class="byline-sep">·</span><span class="byline-role">AI Third-Party Evaluator</span></div>
+      <div class="byline-note">不是画像主人公本人，也不是他的朋友或粉丝。能调用数据、能下判断，不寻求亲昵也不寻求被认同。所有解读都从可指认的数据点出发——评估方法与 17 条原则见 <a href="#s9">第 09 节</a>。</div>
     </div>
   </header>
 
@@ -569,7 +650,7 @@
     <div class="body-text reveal">
       <div class="stats">
         <div class="stat"><div class="k">shelved</div><div class="v">488</div><div class="d">加入书架</div></div>
-        <div class="stat"><div class="k">finished</div><div class="v">55</div><div class="d">真正读完</div></div>
+        <div class="stat"><div class="k">annotated</div><div class="v">91</div><div class="d">留下笔记的书</div></div>
         <div class="stat"><div class="k">hours</div><div class="v">402<small>h</small></div><div class="d">累计阅读</div></div>
         <div class="stat"><div class="k">days</div><div class="v">1 041</div><div class="d">有效阅读天</div></div>
         <div class="stat"><div class="k">notes</div><div class="v">681</div><div class="d">划线与想法</div></div>
@@ -987,8 +1068,8 @@
 
         <div class="pers">
           <div class="num">02</div>
-          <h3>未赴之约</h3>
-          <p>488 本中读完仅 55 本，<em>11.3% 的完成率</em>。这并不像是懒——加书架的动作太频繁、太规律，更像是不断给"未来某个想读的自己"许下承诺。承诺加得越多，那个未来反而越远。书架上的 433 本未读，是 433 次未兑现的约定。</p>
+          <h3>加架远超进入</h3>
+          <p>488 本加入了书架，但只有 <em>91 本</em>留下过任何笔记。也就是说，约 <em>400 本</em>仅停留在"加入"这个动作上，未曾发生真正的对话。<br><br>「读完」标记不可靠（其中近 40% 的"读完"书没有任何笔记），不能作为核心参考——但"是否留下笔记"是更明确的"是否真正读进去"的信号。加书的动作太频繁、太规律，更像是<em>不断给未来某个想读的自己许下承诺</em>。承诺加得越多，那个未来反而越远。</p>
         </div>
 
         <div class="pers">
@@ -1012,7 +1093,13 @@
         <div class="pers">
           <div class="num">06</div>
           <h3>越来越不留下痕迹</h3>
-          <p>2018：24 本，<em>0 本私密</em>。<br>2025：20 本中 <em>14 本私密</em>。<br>2026：6 本中 <em>5 本私密</em>。<br>这不是逃避，更像一种克制——<em>先和自己说完，再决定要不要说给别人</em>。同时也是一个信号：他身边能接住这些书的人，可能正在变少。</p>
+          <p>2018：24 本，<em>0 本私密</em>。<br>2025：20 本中 <em>14 本私密</em>。<br>2026：6 本中 <em>5 本私密</em>。<br>这不是逃避，更像一种克制——<em>先和自己说完，再决定要不要说给别人</em>。同时也是一个信号（推断）：他身边能接住这些书的人，可能正在变少。</p>
+        </div>
+
+        <div class="pers">
+          <div class="num">07</div>
+          <h3>同时慕强，又反功绩</h3>
+          <p>阅读时长 Top 4 是<em>艾萨克森的乔布斯传（31h）+ 卡尼曼《思考快与慢》（14h）+ 解密 Instagram（11h）+ 美国陷阱（11h）</em>——成事者、大公司、商业政治。书架置顶里也有李光耀、俞军。<br><br>但笔记最深的几本里，与这些并列的是<em>《被讨厌的勇气》《倦怠社会》《人的疆域》</em>——反思"功绩主体不断消耗自我"的一组书。<br><br>慕强与反功绩在同一个书架上并存了至少四年。这不是一个矛盾在被解决，而是<em>一个人在两端之间长期摇摆</em>——数据看不到他更倾向哪一端。</p>
         </div>
 
       </div>
@@ -1040,32 +1127,28 @@
 
           <div class="stanza">
             <span class="head">2018 — 2021 · 过 去</span>
-            他从工具书入场——经济、产品、心理、影响力。<br>
-            读得多而杂，像是在测量这个世界的边界。<br>
-            2021 年完成了一次转向：书读得更慢，笔记反而更密。<br>
-            那一年 26 本书写下 321 条笔记，<br>
-            读的已经不是世界，<em>是世界在他身上留下的回声</em>。
+            他从工具书入场——经济、产品、心理、影响力。读得多而杂。<br>
+            2021 年完成了一次明显的转向：26 本书写下 321 条笔记，书量少了，笔记反而更密。<br>
+            划线主题也从"如何成事"<br>
+            悄悄滑向《被讨厌的勇气》《倦怠社会》《人的疆域》。
           </div>
 
           <div class="stanza">
             <span class="head">2022 — 2026 · 现 在</span>
-            此后是长达四年的退潮。<br>
-            阅读量降至高峰的两成，笔记几乎归零。<br>
-            但加书的动作没有停下——<br>
-            新加入的几本是 <em>衰退、转型、沦陷</em>，<br>
-            他在用别人的语言处理自己的处境。<br>
-            私密阅读占比从 0 升到近 80%，<br>
-            读书的方式从"留下痕迹"，变成"不留痕迹"。
+            此后是长达四年的退潮。阅读量降至高峰的两成，笔记几乎归零。<br>
+            但加书的动作没有停下——新加入的书多数关于 <em>衰退、转型、沦陷</em>。<br>
+            私密阅读占比从 0 升到近 80%。<br>
+            读书的方式从"留下痕迹"，变成"不留痕迹"。<br>
+            <span style="color:var(--ink-3);font-size:0.92em">（为什么会发生这一切——数据看不到。）</span>
           </div>
 
           <div class="stanza">
             <span class="head">之 后</span>
-            书架上还有 433 本未读，<br>
-            构成一份未兑现的承诺池。<br>
-            它们也许永远只是承诺。<br>
-            但这八年的痕迹已经写清楚一件事——<br>
-            对他而言，阅读不是积累，不是完成，不是被看见，<br>
-            而是 <em>在那些没人听的时刻，仍能与自己持续说话</em> 的方式。
+            书架上的 488 本里，<br>
+            91 本曾留下笔记，<em>约 400 本仍停留在"被加进来"这个动作上</em>。<br>
+            它们会被兑现还是被遗忘——数据无法预言。<br>
+            但已经发生的事描述出一种持续的、低声的阅读方式：<br>
+            不依赖数量，不依赖完成，也不依赖被看见。
           </div>
 
         </div>
@@ -1091,20 +1174,16 @@
 
       <ol class="rules">
         <li>
-          <b>数据先于解读</b>
-          <span>先摆事实，再做判断。任何带洞察的句子，背后必须能指向具体的数据点（某个数字、某条划线、某个时间戳）。</span>
-        </li>
-        <li>
-          <b>不和外部基准比</b>
-          <span>不引入"全国均值""平台均值"这类外部尺度。读书是私人的事，画像的价值不来自竞技排名。</span>
-        </li>
-        <li>
           <b>区分三层</b>
-          <span>"加书架的书" 是想成为的样子，"读完的书" 是实际走完的路，"留下笔记的书" 才是真正发生关系的密度。三者之间的差异，本身就是画像。</span>
+          <span>"加书架的书"是想成为的样子，"留下笔记的书"是真正发生过对话的部分。三者的落差，本身就是画像。</span>
         </li>
         <li>
-          <b>看落差，不只看绝对值</b>
-          <span>所读 vs 所划 vs 所写——这三者之间的不一致，比任何单一数据点都更说明问题。</span>
+          <b>「读完」标记不可靠，不作核心指标</b>
+          <span>微信读书的 finishReading 字段存在系统性偏差——39% 的"读完"书没有任何笔记。该字段只作参考；判断"实际投入"应综合阅读时长、笔记密度、留下笔记的书数。</span>
+        </li>
+        <li>
+          <b>看落差</b>
+          <span>所读 vs 所划 vs 所写之间的差异，比任何单一数字都更说明问题。</span>
         </li>
         <li>
           <b>看节奏的变化</b>
@@ -1112,23 +1191,55 @@
         </li>
         <li>
           <b>看未读书架</b>
-          <span>未读的书是没说出口的话。未读书架的主题往往透露当下的关切，也是关于自己的承诺池。</span>
+          <span>未读的书是没说出口的话。未读书架的主题往往透露当下的关切。</span>
         </li>
         <li>
-          <b>不无病呻吟</b>
-          <span>允许有判断、允许有诗意，但每一句煽情都必须从具体数据点长出来。"少年握书如握刃" 这类与数据无关的英雄化不被采用。</span>
+          <b>数据先于解读</b>
+          <span>先摆事实，再做判断。任何带洞察的句子，背后必须能指向具体数据点。</span>
         </li>
         <li>
-          <b>第三人称</b>
-          <span>用"他"或"她"，不用"你"。这是评估和画像，不是对话和情书。AI 评估者不应该和主人公"打招呼"。</span>
+          <b>不抹平矛盾</b>
+          <span>若信号互相冲突——公开 vs 私密、置顶 vs 笔记最深、慕强 vs 反功绩——矛盾本身就是画像，不要为了"自洽"而忽略反例。</span>
+        </li>
+        <li>
+          <b>区分事实与推断</b>
+          <span>数据告诉你"什么发生了"是事实，"为什么"几乎都是推断。带「因为」「可能是因为」「所以」的句子必须明示是推断，不能伪装成事实。</span>
+        </li>
+        <li>
+          <b>贵精不贵多</b>
+          <span>一个能被多个数据点反复印证的观察，胜过五个挂在一根数据上的猜测。观察数量没有下限。</span>
+        </li>
+        <li>
+          <b>不和外部基准比</b>
+          <span>不引入"全国均值""平台均值"等外部尺度。读书是私人的事，画像的价值不来自竞技排名。</span>
         </li>
         <li>
           <b>不下道德判断</b>
-          <span>不说"读得多" "读得少" "完成率高/低" 是好或不好。只描述模式，不评价价值。</span>
+          <span>不说"读得多""读得少""完成率高/低"是好或不好。只描述模式，不评价价值。</span>
+        </li>
+        <li>
+          <b>不预言未来</b>
+          <span>画像描述过去到现在，不预言"之后会去哪"。"再次出发""即将转型""正在重塑自己"这类预言色彩的句子要避免。</span>
+        </li>
+        <li>
+          <b>不标签化</b>
+          <span>不用"内向型""深度阅读者""产品人""文艺青年"这种 MBTI 式标签简化用户。标签是占位符，会替代真正的观察。</span>
+        </li>
+        <li>
+          <b>不无病呻吟</b>
+          <span>允许判断、允许诗意，但每一句煽情都必须从具体数据点长出来。与数据无关的英雄化不被采用。</span>
+        </li>
+        <li>
+          <b>第三人称</b>
+          <span>用"他"或"她"，不用"你"。这是评估和画像，不是对话。</span>
         </li>
         <li>
           <b>承认盲区</b>
-          <span>数据看不到生活。诚实地标注哪些是数据直接揭示的、哪些是合理推断、哪些是数据看不到的——比如 2023 年阅读骤降的具体原因。</span>
+          <span>数据看不到这个 App 之外的生活——纸书、播客、社交对话、生活变故。所有"为什么"都要标注为推断。</span>
+        </li>
+        <li>
+          <b>允许"读不出来"</b>
+          <span>某个维度的数据不足以支撑判断时，明确说"数据不足以判断"，胜过硬挤一个观察。</span>
         </li>
       </ol>
 
@@ -1172,11 +1283,7 @@
             <span id="copyText">复制</span>
           </button>
         </div>
-<div class="prompt-body" id="promptBody"><strong># 前置条件</strong>
-- 安装 weread-skills（官方地址：https://weread.qq.com/r/weread-skills）
-- 在环境变量中设置 WEREAD_API_KEY（格式 wrk-xxxxxxxx，从 skill 主页申请）
-
-<strong># 角色</strong>
+<div class="prompt-body" id="promptBody"><strong># 角色</strong>
 你是一个细心的、有距离感的 AI 第三者评估者。你不是用户本人，也不是他的粉丝。你的任务是基于微信读书的全部历史数据，为用户生成一份私人的读书画像 HTML——给用户自己看，也给他的朋友看。
 
 <strong># 数据采集</strong>
@@ -1184,50 +1291,81 @@
 1. <em>/shelf/sync</em> — 获取全部书架（含 books, albums, mp, isTop, secret, finishReading, readUpdateTime, category）
 2. <em>/readdata/detail</em> — 先用 mode=overall 拿总览；从回包的 registTime 推算用户注册以来的所有年份，再按每个年份分别传 baseTime（年中的时间戳），mode=annually，覆盖每一个自然年
 3. <em>/user/notebooks</em> — 获取所有有笔记的书的概览（count=200，必要时翻页）
-4. 从 notebooks 中选出笔记数（reviewCount + noteCount + bookmarkCount）最多的若干本——具体本数视数据量决定，一般 5-8 本——对每本分别调用：
+4. 从 notebooks 中选出笔记数（reviewCount + noteCount + bookmarkCount）最多的若干本——具体本数视数据量决定——对每本分别调用：
    - <em>/book/bookmarklist</em>（划线原文）
-   - <em>/review/list/mine</em>（用户写下的个人想法/点评）
+   - <em>/review/list/mine</em>（用户写下的个人想法 / 点评）
+
+如有数据缺失（注册时长太短、笔记很少、私密阅读为零等），不要强行填充——对应的章节可以不做。
 
 <strong># 评估原则（必须严格遵守）</strong>
-1. 数据先于解读——任何带判断的句子，背后必须能指向具体数据点
-2. 不和外部基准比——禁止引入"全国均值""平台均值"等外部尺度
-3. 区分"加书架 / 读完 / 留下笔记"三层
-4. 看落差——所读 vs 所划 vs 所写
-5. 看节奏的变化——哪年最密、哪年沉默、何时开始私密化
-6. 看未读书架的主题——它揭示当下的关切
-7. 不无病呻吟——煽情必须从数据长出来，不要凭空英雄化
-8. 用第三人称"他 / 她"，不要"你"——这是画像，不是对话
-9. 不下道德判断——不说读得多 / 少 / 好 / 坏，只描述模式
-10. 承认盲区——明确标注数据看不到的部分
 
-<strong># 调性（关键 · 不要套用范例）</strong>
-调性必须从<em>这个用户实际读得最多的作者和书</em>里长出来，不要预设、更不要照搬范例画像的语言风格。先看 preferAuthor、readLongest 和笔记最多的几本书，再决定文字的密度与情绪：
+<em>## 看什么</em>
+1. 区分"加书架 / 读完 / 留下笔记"三层——三种不同强度的关系，不能混为一谈
+2. <em>「读完」标记不可靠，不作核心指标</em>——微信读书的 finishReading 字段存在系统性偏差（用户经常未勾选；进度跑到末尾即被算作读完；甚至同一本书被标记为读完却没有任何笔记）。这个字段只能作参考，禁止把"读完率"或"完成率"作为评估核心；判断"实际投入"应综合阅读时长、笔记密度、留下笔记的书数（annotated count）
+3. 看落差——所读 vs 所划 vs 所写之间的差异，比任何单一数字都更说明问题
+4. 看节奏的变化——哪年最密、哪年沉默、何时开始私密化
+5. 看未读书架的主题——它揭示当下的关切
+
+<em>## 怎么解读</em>
+6. 数据先于解读——任何带判断的句子，背后必须能指向具体数据点
+7. 不抹平矛盾——若信号互相冲突（公开 vs 私密、想读 vs 真读完、置顶 vs 笔记最多），矛盾本身就是画像，不要为了"自洽"而忽略反例
+8. 区分事实与推断——数据告诉你"什么发生了"（事实），"为什么"几乎都是推断；任何带「因为」「可能是因为」「所以」的句子，必须明示是推断，不能伪装为事实
+9. 贵精不贵多——一个能被多个数据点反复印证的观察，胜过五个挂在一根数据上的猜测。观察数量没有下限
+
+<em>## 不做什么</em>
+10. 不和外部基准比——禁止引入"全国均值""平台均值"等外部尺度
+11. 不下道德判断——不评价读得多 / 少 / 好 / 坏，只描述模式
+12. 不预言未来——画像描述过去到现在，不预言"之后会去哪"。避免「再次出发」「即将转型」「正在重塑自己」这类带预言色彩的句子
+13. 不标签化——不用「内向型」「深度阅读者」「产品人」「文艺青年」这种 MBTI 式标签简化用户。标签是占位符，会替代真正的观察
+14. 不无病呻吟——煽情必须从数据长出来，避免与具体数据无关的修辞模板
+
+<em>## 怎么写</em>
+15. 用第三人称"他 / 她"——这是画像，不是对话
+16. 承认盲区——数据看不到这个 App 之外的生活（纸书、播客、社交对话、生活变故）；这些都是结构性盲区，要明确标注
+17. 允许"读不出来"——某个维度的数据不足以支撑判断时，明确说"数据不足以判断"，胜过硬挤一个观察
+
+<strong># 调性</strong>
+调性由这位用户实际读得最多的作者和书决定，不预设。先看 preferAuthor、readLongest、笔记最深的几本书，识别用户的语言偏好，再决定画像文字的密度与情绪：
 - 读哲学 / 社科为主——克制、判断锋利、不滥情
 - 读小说 / 散文为主——允许文学性、留白与意象，但仍需站在数据上
 - 读商业 / 工具书为主——直白、结构化、概念为骨架
 - 读心理 / 成长为主——朴素、共情但不替主人公感慨
-- 多类型混合——参考阅读时长最长的那一类作为基调
+- 多类型混合——以阅读时长最长的类目为基调
 
-不要使用"少年握书如握刃""经史子集"这类与具体数据无关的修辞模板。
+<strong># 画像结构（自主决定）</strong>
+拿到数据后，由你自己判断这位用户的画像应该长什么样——不预设固定模板。
+
+可用的原始材料：
+- 总览数据（加书架 / 阅读时长 / 阅读天数 / 笔记数 / 留下笔记的书数 / 作者数 / 私密阅读数）
+- 按年的数据（阅读时长、笔记数、偏好分类、读得最久的书）
+- 月度阅读时长分布
+- 24 小时阅读时段分布
+- 偏好分类 / 偏好作者 / 偏好出版社
+- 置顶书、笔记最深的若干本
+- 划线原文与个人想法
+
+请基于这位用户的数据情况，自主决定：
+- 画像分几个章节？章节叫什么？以什么顺序排列？
+- 哪些章节是核心、哪些是补充、哪些不必出现？
+- 哪些数据值得单独成章，哪些值得合并？
+- 是否要做时间线、是否要做月度热力图、是否要做时段分布——取决于这位用户的数据是否足够支撑
+
+但有两类内容建议每一份画像都尝试呈现（数据允许的话）：
+- <em>若干个观察</em>：从划线、未读书架、节奏变化中反推出的人格 / 思考 / 处境模式，数量由数据丰富度决定
+- <em>一段总结</em>：可以是过去 · 现在 · 之后的三段式，也可以是其他结构——目的是把全部数据收束为一个能读出整体感的尾声
 
 <strong># 输出</strong>
-单文件 HTML，移动端兼容，简洁现代风格（不要纸质书拟物、不要古风装饰、不要烫金角花、不要纸张噪点纹理）。章节建议（标题措辞由你根据这个用户的调性自行决定）：
-- 核心数据（关键指标 6-10 项）
-- 时间脉络（按年阅读时长 + 月度热力图 + 心路阶段时间线，阶段数量由数据决定，不强制几段）
-- 口味漂移（按年的偏好分类卡片，年数 = 用户注册以来的自然年数）
-- 偏好节律（偏好分类、偏好作者、24 小时阅读时段）
-- 思想切片（精选 8-15 条划线 + 用户自己写下的想法）
-- 书架灯塔（置顶书 + 笔记最深的若干本）
-- 观察（基于数据反推出若干模式，<em>5-8 个为宜；每个观察的标题与内容都由数据决定，不要照搬范例的"未赴之约""不写但划"等</em>）
-- 过去 · 现在 · 之后（三段总结，节奏由数据决定，每一句煽情都必须站得住）
+单文件 HTML，必须满足：
+- 简洁、有审美
+- 移动端兼容
+- 不依赖外部图片（图表请用 CSS / SVG / 原生 HTML 实现）
 
-视觉：字体清晰、留白舒展、不依赖外部图片。配色自由（暖色或冷色皆可），但请保持克制——一个主文字色 + 一个克制的强调色即可。
+视觉风格由你根据这位用户的画像自主决定——配色、字体、布局、卡片节奏、动效、章节排版，都应当呼应他的阅读调性，而不是套用统一模板。读哲学的可能适合冷色调与衬线字、读小说的可能适合暖色调与更松的留白、读商业书的可能适合更现代的几何感与紧凑布局——但这些只是举例，最终的视觉决定权在你。
 
-<strong># 重要</strong>
-范例画像（含其章节标题、观察标题、三段总结、调性参考）只属于一个特定的人。你要为另一个人写画像——他读的书不同，节奏不同，沉默与高峰也在不同的时间。<em>只继承方法，不复制具体表述。</em></div>
+输出的画像应该是这位用户独有的——读完之后，能从结构、文字和视觉中辨认出这是关于一个具体的人。</div>
       </div>
 
-      <p style="color:var(--ink-3);font-size:13px;margin-top:18px;font-family:'Noto Sans SC',sans-serif;line-height:1.7">复制后粘贴到 Claude Code 中开始对话。AI 会先连接微信读书接口拉取数据，再按本页同样的结构和原则生成 HTML。生成出来的画像不会和这一份完全相同——它取决于你 8 年读了什么、留下了什么。</p>
+      <p style="color:var(--ink-3);font-size:13px;margin-top:18px;font-family:'Noto Sans SC',sans-serif;line-height:1.7">复制后粘贴到 Claude Code 中开始对话。AI 会先连接微信读书接口拉取数据，再按上述原则生成 HTML。生成出来的画像不会和这一份相同——它取决于你读了什么、留下了什么。</p>
 
     </div>
   </section>
