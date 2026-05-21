@@ -1,0 +1,19 @@
+# Private reading data — DO NOT commit
+data/
+
+# Original Chinese-named copy (we publish index.html instead)
+我的读书画像.html
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs / temp
+*.log
+*.tmp

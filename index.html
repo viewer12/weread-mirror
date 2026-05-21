@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<meta name="theme-color" content="#faf8f3">
+<title>一个读者的八年 · 微信读书 2018—2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf8f3;
+    --bg-2:#ffffff;
+    --bg-3:#f3f0e8;
+    --ink:#1a1816;
+    --ink-2:#3d3833;
+    --ink-3:#6e665c;
+    --ink-4:#a8a094;
+    --line:#e6e1d6;
+    --line-2:#efeae0;
+    --accent:#b8453a;
+    --accent-d:#8a2f25;
+    --accent-soft:rgba(184,69,58,.08);
+    --gold:#a8853c;
+    --jade:#5a7a5c;
+    --indigo:#3d5570;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Noto Serif SC","Songti SC",serif;
+    line-height:1.85;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
+
+  /* ===== Reading progress ===== */
+  .progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);width:0;z-index:100;transition:width .15s ease-out}
+
+  /* ===== Top nav (responsive chips) ===== */
+  .topnav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(250,248,243,.92);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    padding:14px 20px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .topnav::-webkit-scrollbar{display:none}
+  .topnav-inner{display:flex;gap:24px;max-width:720px;margin:0 auto;white-space:nowrap;align-items:center;font-family:"Noto Sans SC",sans-serif}
+  .topnav-brand{font-family:"Noto Serif SC",serif;font-weight:500;color:var(--ink);font-size:14px;letter-spacing:1px;margin-right:8px;flex-shrink:0}
+  .topnav a{font-size:13px;color:var(--ink-3);text-decoration:none;transition:color .2s;cursor:pointer;flex-shrink:0}
+  .topnav a:hover,.topnav a.active{color:var(--accent)}
+  .topnav a .num{font-family:"Lora",serif;font-style:italic;color:var(--ink-4);margin-right:4px;font-size:12px}
+  .topnav a.active .num{color:var(--accent)}
+
+  /* ===== Layout ===== */
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .9s ease-out,transform .9s ease-out}
+  .reveal.in{opacity:1;transform:translateY(0)}
+
+  /* ===== Hero ===== */
+  .hero{padding:80px 0 60px;text-align:left}
+  .hero-eyebrow{font-family:"Lora",serif;font-style:italic;font-size:13px;color:var(--accent);letter-spacing:1px;margin-bottom:18px}
+  .hero h1{font-size:48px;font-weight:700;line-height:1.15;letter-spacing:-1px;color:var(--ink);margin-bottom:16px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero-sub{font-size:18px;color:var(--ink-2);line-height:1.7;font-weight:300;max-width:580px}
+  .hero-meta{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);font-family:"Noto Sans SC",sans-serif;font-size:13px;color:var(--ink-3);display:flex;gap:24px;flex-wrap:wrap}
+  .hero-meta span b{color:var(--ink);font-weight:500;font-family:"Lora",serif;font-style:italic;margin-right:4px}
+
+  /* ===== Section ===== */
+  section{padding:60px 0;border-top:1px solid var(--line)}
+  .sec-head{margin-bottom:36px}
+  .sec-num{font-family:"Lora",serif;font-style:italic;font-size:14px;color:var(--accent);letter-spacing:1px;display:block;margin-bottom:8px}
+  .sec-title{font-size:32px;font-weight:600;color:var(--ink);line-height:1.25;letter-spacing:-.5px;margin-bottom:10px}
+  .sec-sub{font-size:15px;color:var(--ink-3);font-weight:300;line-height:1.7}
+
+  /* ===== Body ===== */
+  .body-text p{margin-bottom:1.3em;color:var(--ink-2);font-size:16.5px;line-height:1.95}
+  .body-text p.lead{font-size:19px;color:var(--ink);font-weight:400;line-height:1.7;margin-bottom:1.8em}
+  .body-text em{font-style:normal;color:var(--accent);font-weight:500}
+  .body-text b{color:var(--ink);font-weight:600}
+
+  /* ===== Stats grid ===== */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:40px;border-radius:4px;overflow:hidden}
+  .stat{background:var(--bg-2);padding:22px 16px;text-align:left;transition:background .3s}
+  .stat:hover{background:#fdfbf6}
+  .stat .k{font-family:"Lora",serif;font-style:italic;font-size:11px;color:var(--ink-3);letter-spacing:.5px;margin-bottom:6px}
+  .stat .v{font-size:30px;font-weight:600;color:var(--ink);line-height:1;font-family:"Noto Serif SC",serif}
+  .stat .v small{font-size:13px;color:var(--ink-3);font-weight:400;margin-left:2px}
+  .stat .d{font-size:11.5px;color:var(--ink-3);margin-top:6px;font-family:"Noto Sans SC",sans-serif;line-height:1.4}
+  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* ===== Pull quote ===== */
+  .pull-quote{
+    margin:48px 0;
+    padding:24px 0 24px 28px;
+    border-left:3px solid var(--accent);
+    color:var(--ink);
+    font-size:18px;
+    line-height:1.85;
+    font-weight:400;
+  }
+  .pull-quote em{font-style:normal;color:var(--accent);font-weight:500}
+
+  /* ===== Year chart ===== */
+  .year-chart{margin-top:40px;display:flex;align-items:flex-end;gap:8px;height:200px;padding:30px 0 10px;position:relative}
+  .ybar{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;min-width:0}
+  .ybar .bar{width:100%;background:var(--ink-4);min-height:2px;border-radius:2px 2px 0 0;transition:all .4s ease-out;position:relative}
+  .ybar:hover .bar{background:var(--accent)}
+  .ybar.peak .bar{background:var(--accent)}
+  .ybar .lbl{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:"Lora",serif;font-style:italic;font-size:11px;color:var(--ink-3);white-space:nowrap}
+  .ybar .yr{font-family:"Lora",serif;font-style:italic;font-size:11px;color:var(--ink-3)}
+  .ybar.dim .bar{opacity:.5}
+
+  /* ===== Heatmap ===== */
+  .hm-wrap{margin-top:32px}
+  .hm-grid{display:grid;grid-template-columns:36px repeat(12,1fr);gap:3px;font-family:"Lora",serif;font-style:italic;font-size:10px}
+  .hm-grid .hd{color:var(--ink-4);text-align:center;padding:4px 0}
+  .hm-grid .yl{color:var(--ink-3);text-align:right;padding:4px 6px 4px 0;font-weight:500}
+  .hm-cell{aspect-ratio:1;background:var(--bg-3);border-radius:2px;display:flex;align-items:center;justify-content:center;color:transparent;font-size:9px;transition:all .2s;cursor:default;position:relative}
+  .hm-cell:hover{transform:scale(1.4);z-index:5;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+  .hm-cell[data-v="0"]{background:var(--bg-3)}
+  .hm-cell[data-v="1"]{background:rgba(184,69,58,.15)}
+  .hm-cell[data-v="2"]{background:rgba(184,69,58,.3)}
+  .hm-cell[data-v="3"]{background:rgba(184,69,58,.5)}
+  .hm-cell[data-v="4"]{background:rgba(184,69,58,.75);color:#fff}
+  .hm-cell[data-v="5"]{background:var(--accent);color:#fff}
+  .hm-cell[data-v="4"],.hm-cell[data-v="5"]{font-weight:500}
+  .hm-legend{display:flex;align-items:center;gap:5px;margin-top:14px;font-family:"Lora",serif;font-style:italic;font-size:11px;color:var(--ink-3);justify-content:flex-end}
+  .hm-legend .box{display:inline-block;width:12px;height:12px;border-radius:2px}
+  @media(max-width:560px){.hm-grid{grid-template-columns:28px repeat(12,1fr);gap:2px;font-size:8px}.hm-grid .yl{padding-right:3px}}
+
+  /* ===== Timeline ===== */
+  .timeline{margin-top:40px;padding-left:24px;position:relative}
+  .timeline::before{content:'';position:absolute;left:4px;top:8px;bottom:8px;width:1px;background:var(--line)}
+  .ti{position:relative;padding:0 0 32px 24px}
+  .ti::before{content:'';position:absolute;left:-24px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--ink-4);box-shadow:0 0 0 3px var(--bg)}
+  .ti.accent::before{border-color:var(--accent)}
+  .ti .yr{font-family:"Lora",serif;font-style:italic;font-size:12px;color:var(--accent);letter-spacing:.5px}
+  .ti h3{font-size:19px;margin:6px 0 8px;color:var(--ink);font-weight:600;line-height:1.4}
+  .ti p{color:var(--ink-2);font-size:15px;line-height:1.8}
+
+  /* ===== Year drift cards ===== */
+  .yd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
+  @media(max-width:640px){.yd-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:420px){.yd-grid{grid-template-columns:1fr}}
+  .yd{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:20px;transition:all .3s;position:relative}
+  .yd:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.06);border-color:var(--ink-4)}
+  .yd .y{font-family:"Lora",serif;font-style:italic;font-size:13px;color:var(--accent);font-weight:500;letter-spacing:.5px}
+  .yd .h{font-size:24px;color:var(--ink);font-weight:600;margin-top:4px;line-height:1.1;font-family:"Noto Serif SC",serif}
+  .yd .h small{font-family:"Lora",serif;font-style:italic;font-size:11px;color:var(--ink-3);margin-left:6px;font-weight:400}
+  .yd .meta{font-size:12.5px;color:var(--ink-3);margin-top:8px;line-height:1.6;font-family:"Noto Sans SC",sans-serif}
+  .yd .meta b{color:var(--accent);font-weight:500}
+  .yd .top-cat{margin-top:12px;padding-top:10px;border-top:1px solid var(--line-2);display:flex;flex-direction:column;gap:4px}
+  .yd .top-cat .c{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink-2);font-family:"Noto Sans SC",sans-serif}
+  .yd .top-cat .c span:last-child{color:var(--ink-3);font-family:"Lora",serif;font-style:italic}
+  .yd .top-book{margin-top:10px;font-size:11.5px;color:var(--ink-3);line-height:1.5}
+  .yd .top-book b{color:var(--ink-4);font-weight:400;display:block;font-size:9.5px;letter-spacing:1.5px;margin-bottom:2px;text-transform:uppercase;font-family:"Inter",sans-serif}
+  .yd.peak{border-color:var(--accent)}
+  .yd.peak .h{color:var(--accent)}
+  .yd.dim{opacity:.55}
+
+  /* ===== Two panel ===== */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+  @media(max-width:640px){.two{grid-template-columns:1fr}}
+  .panel{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:24px}
+  .panel h3{font-size:14px;color:var(--ink-3);font-weight:500;letter-spacing:1px;margin-bottom:18px;font-family:"Noto Sans SC",sans-serif;text-transform:uppercase;font-size:12px}
+
+  .cat-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:13.5px;font-family:"Noto Sans SC",sans-serif}
+  .cat-row .name{width:74px;color:var(--ink-2);flex-shrink:0;font-weight:400}
+  .cat-row .bar{flex:1;height:5px;background:var(--bg-3);border-radius:3px;overflow:hidden}
+  .cat-row .fill{height:100%;background:var(--accent);border-radius:3px;transform:scaleX(0);transform-origin:left;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+  .cat-row.in .fill{transform:scaleX(1)}
+  .cat-row .val{font-family:"Lora",serif;font-style:italic;color:var(--ink-3);font-size:12px;width:42px;text-align:right;font-weight:500}
+
+  .hours{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;margin-top:18px;align-items:end;height:90px}
+  .hr{background:var(--ink-4);border-radius:1px 1px 0 0;min-height:2px;transition:all .8s cubic-bezier(.2,.8,.2,1);transform:scaleY(0);transform-origin:bottom;opacity:.6}
+  .hr.in{transform:scaleY(1)}
+  .hr.peak{background:var(--accent);opacity:1}
+  .hr-lbl{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;margin-top:6px;font-family:"Lora",serif;font-style:italic;font-size:9px;color:var(--ink-4);text-align:center}
+  @media(max-width:480px){.hr-lbl{font-size:8px}}
+
+  /* ===== Quote wall ===== */
+  .quote-wall{margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:640px){.quote-wall{grid-template-columns:1fr}}
+  .qcard{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:22px 22px;
+    border-left:3px solid var(--accent);
+    transition:transform .3s;
+  }
+  .qcard:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.05)}
+  .qcard.gold{border-left-color:var(--gold)}
+  .qcard.jade{border-left-color:var(--jade)}
+  .qcard.indigo{border-left-color:var(--indigo)}
+  .qcard .src{font-family:"Noto Sans SC",sans-serif;font-size:11px;color:var(--ink-3);letter-spacing:1px;margin-bottom:10px;font-weight:500}
+  .qcard.gold .src{color:var(--gold)}
+  .qcard.jade .src{color:var(--jade)}
+  .qcard.indigo .src{color:var(--indigo)}
+  .qcard .q{color:var(--ink);font-size:14.5px;line-height:1.85}
+  .qcard .when{font-family:"Lora",serif;font-style:italic;font-size:11.5px;color:var(--ink-4);margin-top:12px;padding-top:10px;border-top:1px solid var(--line-2)}
+  .qcard.thought{background:var(--accent-soft);border-left-style:dashed}
+  .qcard.thought .q{font-size:16px;text-align:center;color:var(--accent-d);font-weight:500;line-height:1.6}
+  .qcard.thought .q::before{content:'「';color:var(--accent);margin-right:2px}
+  .qcard.thought .q::after{content:'」';color:var(--accent);margin-left:2px}
+
+  /* ===== Books ===== */
+  .books-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
+  @media(max-width:640px){.books-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:420px){.books-grid{grid-template-columns:1fr}}
+  .bk{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:18px 18px 16px;
+    transition:all .3s;
+    position:relative;
+  }
+  .bk:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 6px 18px rgba(0,0,0,.05)}
+  .bk .ti{font-size:16px;color:var(--ink);font-weight:600;line-height:1.4;margin-bottom:4px}
+  .bk .au{font-size:12px;color:var(--ink-3);font-family:"Noto Sans SC",sans-serif}
+  .bk a{display:inline-block;margin-top:12px;font-family:"Lora",serif;font-style:italic;font-size:12px;color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
+  .bk a:hover{color:var(--accent-d)}
+
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px}
+  .tag{padding:6px 12px;border:1px solid var(--line);border-radius:20px;font-size:12px;color:var(--ink-2);background:var(--bg-2);font-family:"Noto Sans SC",sans-serif;transition:all .2s}
+  .tag.hi{border-color:var(--accent);color:var(--accent)}
+  .tag:hover{border-color:var(--ink-3);background:var(--bg-3)}
+
+  /* ===== Persona ===== */
+  .persona-list{margin-top:32px;display:flex;flex-direction:column;gap:24px}
+  .pers{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:28px;
+    position:relative;
+    transition:all .3s;
+  }
+  .pers:hover{border-color:var(--ink-4);box-shadow:0 6px 24px rgba(0,0,0,.04)}
+  .pers .num{font-family:"Lora",serif;font-style:italic;font-size:14px;color:var(--accent);letter-spacing:1px;margin-bottom:8px;font-weight:500}
+  .pers h3{font-size:22px;color:var(--ink);font-weight:600;margin-bottom:12px;line-height:1.35;letter-spacing:-.3px}
+  .pers p{color:var(--ink-2);font-size:15.5px;line-height:1.85}
+  .pers p em{color:var(--accent);font-style:normal;font-weight:500}
+  .pers p b{color:var(--ink);font-weight:600}
+
+  /* ===== Poem ===== */
+  .poem-wrap{
+    margin-top:40px;
+    padding:48px 32px;
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    text-align:left;
+  }
+  .poem{font-size:17px;line-height:2.05;color:var(--ink);font-weight:300}
+  .poem .stanza{margin-bottom:36px;opacity:0;transform:translateY(16px);transition:all 1.2s ease-out}
+  .poem .stanza.in{opacity:1;transform:translateY(0)}
+  .poem .stanza:last-child{margin-bottom:0}
+  .poem .head{
+    display:block;
+    font-family:"Lora",serif;
+    font-style:italic;
+    font-size:13px;
+    color:var(--accent);
+    letter-spacing:2px;
+    margin-bottom:14px;
+    text-transform:uppercase;
+  }
+  .poem em{font-style:normal;color:var(--accent);font-weight:500;border-bottom:1px solid var(--accent-soft);padding-bottom:1px}
+  .sig{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink-3);font-size:13px;font-family:"Noto Sans SC",sans-serif;text-align:right}
+
+  /* ===== Method section ===== */
+  .method-intro{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:24px 26px;margin-top:28px}
+  .method-intro h4{font-size:13px;color:var(--ink-3);text-transform:uppercase;letter-spacing:1.5px;font-family:"Noto Sans SC",sans-serif;font-weight:500;margin-bottom:10px}
+  .method-intro p{color:var(--ink-2);font-size:15px;line-height:1.85}
+  .method-intro p em{color:var(--accent);font-style:normal;font-weight:500}
+
+  .rules{margin-top:32px;list-style:none;counter-reset:rule;display:flex;flex-direction:column;gap:14px}
+  .rules li{
+    position:relative;
+    padding:18px 22px 18px 56px;
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:6px;
+    counter-increment:rule;
+    transition:border-color .2s;
+  }
+  .rules li:hover{border-color:var(--accent)}
+  .rules li::before{
+    content:counter(rule,decimal-leading-zero);
+    position:absolute;
+    left:18px;
+    top:18px;
+    font-family:"Lora",serif;
+    font-style:italic;
+    color:var(--accent);
+    font-size:18px;
+    font-weight:500;
+  }
+  .rules li b{display:block;color:var(--ink);font-weight:600;font-size:15.5px;margin-bottom:4px}
+  .rules li span{color:var(--ink-2);font-size:14.5px;line-height:1.75}
+
+  /* ===== Setup box ===== */
+  .setup-box{
+    margin:14px 0 32px;
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+  }
+  .setup-row{
+    display:flex;
+    gap:18px;
+    padding:18px 22px;
+    border-bottom:1px solid var(--line-2);
+    align-items:flex-start;
+  }
+  .setup-row:last-child{border-bottom:none}
+  .setup-num{
+    flex-shrink:0;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:"Lora",serif;
+    font-style:italic;
+    font-size:14px;
+    font-weight:500;
+    margin-top:2px;
+  }
+  .setup-content{flex:1;min-width:0}
+  .setup-title{font-size:15.5px;color:var(--ink);font-weight:600;margin-bottom:6px}
+  .setup-link{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    color:var(--accent);
+    text-decoration:none;
+    font-family:"Lora",serif;
+    font-style:italic;
+    font-size:14px;
+    font-weight:500;
+    border-bottom:1px solid var(--accent);
+    padding-bottom:1px;
+    transition:color .2s;
+    word-break:break-all;
+  }
+  .setup-link:hover{color:var(--accent-d)}
+  .setup-link .arrow{font-style:normal;font-size:12px}
+  .setup-code{
+    display:block;
+    font-family:"Lora",monospace;
+    font-size:13px;
+    color:var(--accent);
+    background:var(--bg-3);
+    padding:8px 12px;
+    border-radius:4px;
+    word-break:break-all;
+    margin-bottom:4px;
+  }
+  .setup-desc{font-size:13px;color:var(--ink-3);line-height:1.65;margin-top:6px;font-family:"Noto Sans SC",sans-serif}
+
+  @media(max-width:640px){
+    .setup-row{padding:16px 18px;gap:14px}
+    .setup-num{width:26px;height:26px;font-size:13px}
+    .setup-title{font-size:14.5px}
+    .setup-link{font-size:13px}
+  }
+
+  .prompt-box{
+    margin-top:32px;
+    background:#1a1816;
+    color:#e3dac4;
+    border-radius:8px;
+    overflow:hidden;
+    position:relative;
+    box-shadow:0 4px 16px rgba(0,0,0,.08);
+  }
+  .prompt-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 18px;
+    background:#231f1c;
+    border-bottom:1px solid #2e2925;
+  }
+  .prompt-header .label{font-family:"Lora",serif;font-style:italic;color:#a59682;font-size:13px;letter-spacing:1px}
+  .prompt-header .copy-btn{
+    background:transparent;
+    border:1px solid #4a4239;
+    color:#d4c4a8;
+    padding:6px 14px;
+    border-radius:4px;
+    font-family:"Noto Sans SC",sans-serif;
+    font-size:12px;
+    cursor:pointer;
+    letter-spacing:1px;
+    transition:all .2s;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .prompt-header .copy-btn:hover{background:#3a3530;border-color:var(--accent);color:#fff}
+  .prompt-header .copy-btn.copied{border-color:var(--accent);color:var(--accent);background:rgba(184,69,58,.1)}
+  .prompt-body{
+    padding:22px 24px;
+    font-family:"Lora","Noto Sans SC",monospace;
+    font-size:13.5px;
+    line-height:1.85;
+    color:#d4c4a8;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    max-height:520px;
+    overflow-y:auto;
+  }
+  .prompt-body::-webkit-scrollbar{width:6px}
+  .prompt-body::-webkit-scrollbar-track{background:transparent}
+  .prompt-body::-webkit-scrollbar-thumb{background:#3a3530;border-radius:3px}
+  .prompt-body strong{color:var(--accent);font-weight:600}
+  .prompt-body em{color:#c4a062;font-style:normal}
+
+  .blind-spot{
+    margin-top:28px;
+    padding:18px 22px;
+    border-left:3px solid var(--ink-4);
+    background:var(--bg-3);
+    border-radius:0 6px 6px 0;
+  }
+  .blind-spot h4{font-size:13px;color:var(--ink-3);text-transform:uppercase;letter-spacing:1.5px;font-family:"Noto Sans SC",sans-serif;font-weight:500;margin-bottom:8px}
+  .blind-spot p{color:var(--ink-2);font-size:14.5px;line-height:1.8}
+
+  @media(max-width:640px){
+    .rules li{padding:16px 18px 16px 50px}
+    .rules li::before{left:14px;font-size:16px}
+    .prompt-body{font-size:12.5px;padding:18px 16px}
+    .prompt-header{padding:12px 14px}
+    .method-intro{padding:20px}
+  }
+
+  /* ===== Colophon ===== */
+  .colophon{
+    margin:60px 0 80px;
+    padding:32px 0;
+    border-top:1px solid var(--line);
+    text-align:center;
+    font-size:12px;
+    color:var(--ink-4);
+    font-family:"Noto Sans SC",sans-serif;
+    letter-spacing:1px;
+    line-height:2;
+  }
+  .colophon .line2{font-family:"Lora",serif;font-style:italic;color:var(--ink-3)}
+  .colophon .repo-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:20px;
+    padding:8px 16px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    color:var(--ink-2);
+    text-decoration:none;
+    font-family:"Lora",serif;
+    font-style:italic;
+    font-size:12px;
+    letter-spacing:1px;
+    transition:all .2s;
+    background:var(--bg-2);
+  }
+  .colophon .repo-link:hover{border-color:var(--ink);color:var(--ink);background:var(--bg-3)}
+  .colophon .repo-link svg{flex-shrink:0}
+
+  /* ===== Mobile ===== */
+  @media(max-width:640px){
+    body{font-size:16px}
+    .wrap{padding:0 18px}
+    .hero{padding:48px 0 36px}
+    .hero h1{font-size:34px;letter-spacing:-.5px}
+    .hero-sub{font-size:16px}
+    .hero-meta{gap:14px;font-size:12px}
+    section{padding:48px 0}
+    .sec-title{font-size:25px}
+    .sec-sub{font-size:14px}
+    .body-text p.lead{font-size:16.5px}
+    .body-text p{font-size:15.5px}
+    .pull-quote{font-size:16px;padding-left:20px;margin:36px 0}
+    .stat{padding:16px 12px}
+    .stat .v{font-size:24px}
+    .stat .v small{font-size:11px}
+    .stat .d{font-size:11px}
+    .year-chart{height:160px;gap:5px}
+    .ybar .lbl{font-size:10px;top:-18px}
+    .ybar .yr{font-size:10px}
+    .pers{padding:22px}
+    .pers h3{font-size:19px}
+    .pers p{font-size:15px}
+    .qcard{padding:18px}
+    .qcard .q{font-size:14px}
+    .poem-wrap{padding:32px 22px}
+    .poem{font-size:16px;line-height:2}
+    .topnav{padding:10px 14px}
+    .topnav-inner{gap:18px}
+    .topnav-brand{font-size:13px;margin-right:4px}
+    .topnav a{font-size:12px}
+  }
+  @media(max-width:380px){
+    .hero h1{font-size:30px}
+    .sec-title{font-size:22px}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <span class="topnav-brand">2018 — 2026</span>
+    <a data-target="s1"><span class="num">01</span>概览</a>
+    <a data-target="s2"><span class="num">02</span>八年</a>
+    <a data-target="s3"><span class="num">03</span>漂移</a>
+    <a data-target="s4"><span class="num">04</span>节律</a>
+    <a data-target="s5"><span class="num">05</span>切片</a>
+    <a data-target="s6"><span class="num">06</span>书架</a>
+    <a data-target="s7"><span class="num">07</span>画像</a>
+    <a data-target="s8"><span class="num">08</span>总结</a>
+    <a data-target="s9"><span class="num">09</span>方法</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ===== Hero ===== -->
+  <header class="hero">
+    <div class="hero-eyebrow">微信读书 · 2018.01 — 2026.05</div>
+    <h1>一个读者的八年</h1>
+    <p class="hero-sub">488 本加入书架，55 本读完，681 条笔记，1041 个阅读日。以下是从这些痕迹里看见的几件事——由一个第三者整理。</p>
+    <div class="hero-meta">
+      <span><b>注册</b>2018.01.14</span>
+      <span><b>至今</b>2026.05.21</span>
+      <span><b>历时</b>3 049 天</span>
+    </div>
+  </header>
+
+
+  <!-- ===== 01 · 概览 ===== -->
+  <section id="s1">
+    <div class="sec-head reveal">
+      <span class="sec-num">01 · Overview</span>
+      <h2 class="sec-title">核心数据</h2>
+    </div>
+
+    <div class="body-text reveal">
+      <div class="stats">
+        <div class="stat"><div class="k">shelved</div><div class="v">488</div><div class="d">加入书架</div></div>
+        <div class="stat"><div class="k">finished</div><div class="v">55</div><div class="d">真正读完</div></div>
+        <div class="stat"><div class="k">hours</div><div class="v">402<small>h</small></div><div class="d">累计阅读</div></div>
+        <div class="stat"><div class="k">days</div><div class="v">1 041</div><div class="d">有效阅读天</div></div>
+        <div class="stat"><div class="k">notes</div><div class="v">681</div><div class="d">划线与想法</div></div>
+        <div class="stat"><div class="k">private</div><div class="v">48</div><div class="d">私密阅读</div></div>
+        <div class="stat"><div class="k">authors</div><div class="v">66</div><div class="d">读过的作者</div></div>
+        <div class="stat"><div class="k">peak</div><div class="v">21<small>时</small></div><div class="d">夜读高峰</div></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== 02 · 八年起伏 ===== -->
+  <section id="s2">
+    <div class="sec-head reveal">
+      <span class="sec-num">02 · Timeline</span>
+      <h2 class="sec-title">八年的起伏</h2>
+      <p class="sec-sub">阅读时长按年统计 · 月度热力图 · 五段心路</p>
+    </div>
+
+    <div class="body-text reveal">
+      <div class="year-chart">
+        <div class="ybar peak"><div class="bar" style="height:95%"><span class="lbl">59h</span></div><div class="yr">2018</div></div>
+        <div class="ybar"><div class="bar" style="height:77%"><span class="lbl">48h</span></div><div class="yr">2019</div></div>
+        <div class="ybar"><div class="bar" style="height:82%"><span class="lbl">51h</span></div><div class="yr">2020</div></div>
+        <div class="ybar"><div class="bar" style="height:72%"><span class="lbl">45h</span></div><div class="yr">2021</div></div>
+        <div class="ybar"><div class="bar" style="height:30%"><span class="lbl">19h</span></div><div class="yr">2022</div></div>
+        <div class="ybar dim"><div class="bar" style="height:5%"><span class="lbl">3h</span></div><div class="yr">2023</div></div>
+        <div class="ybar dim"><div class="bar" style="height:26%"><span class="lbl">16h</span></div><div class="yr">2024</div></div>
+        <div class="ybar dim"><div class="bar" style="height:12%"><span class="lbl">7h</span></div><div class="yr">2025</div></div>
+        <div class="ybar dim"><div class="bar" style="height:2%"><span class="lbl">1h</span></div><div class="yr">2026</div></div>
+      </div>
+
+      <div class="hm-wrap">
+        <div class="hm-grid" id="hm"></div>
+        <div class="hm-legend">
+          少
+          <span class="box" style="background:var(--bg-3)"></span>
+          <span class="box" style="background:rgba(184,69,58,.15)"></span>
+          <span class="box" style="background:rgba(184,69,58,.3)"></span>
+          <span class="box" style="background:rgba(184,69,58,.5)"></span>
+          <span class="box" style="background:rgba(184,69,58,.75)"></span>
+          <span class="box" style="background:var(--accent)"></span>
+          多
+        </div>
+      </div>
+
+      <div class="pull-quote">
+        八年里阅读最深的两格，是<em>2018 年 11 月与 12 月</em>——他的最高峰，落在了最初。
+      </div>
+
+      <div class="timeline">
+        <div class="ti">
+          <div class="yr">2018 · 启程</div>
+          <h3>从经济与悬疑入门</h3>
+          <p>初入读书 App，年末两个月连刷 28 小时。第一年读了 26 本，多为经济理财与悬疑推理——这是一个想把世界讲清楚的人，从工具书入场。</p>
+        </div>
+        <div class="ti">
+          <div class="yr">2019–2020 · 燎原</div>
+          <h3>两年 102 本，铺得很开</h3>
+          <p>经济、文学、历史、心理同时展开：乔布斯、卡尼曼、达利欧、影响力。这两年里他没有挑剔，几乎把所有"被推荐的方法论"都收下了。</p>
+        </div>
+        <div class="ti accent">
+          <div class="yr">2021 · 转向</div>
+          <h3>26 本 vs 321 条笔记</h3>
+          <p>书少了，笔记反而暴涨。《俞军产品方法论》《解密 Instagram》《人的疆域》《倦怠社会》集中在这一年——这是他从"读全部"到"读自己"的分水岭。</p>
+        </div>
+        <div class="ti accent">
+          <div class="yr">2022–2023 · 沉默</div>
+          <h3>从 45 小时到 3 小时</h3>
+          <p>2022 年仍读了《可能性的艺术》，留下"读这段是真心痛"。但 2023 年全年只读 3 小时——这中间发生了什么，数据里看不到，只能看到结果。</p>
+        </div>
+        <div class="ti accent">
+          <div class="yr">2024–2026 · 隐秘的重塑</div>
+          <h3>大半新书加入了"私密"</h3>
+          <p>《AI Engineering》中英双版、《埃隆之书》《重组与突破》《告别百年激进》《苹果公司在中国》——他重新出现，但收起了痕迹。新加入的书几乎都不再公开。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== 03 · 口味漂移 ===== -->
+  <section id="s3">
+    <div class="sec-head reveal">
+      <span class="sec-num">03 · Drift</span>
+      <h2 class="sec-title">口味的漂移</h2>
+      <p class="sec-sub">九年九张不同的脸 · 每年的偏好都在悄悄变</p>
+    </div>
+
+    <div class="body-text reveal">
+
+      <div class="yd-grid">
+        <div class="yd peak">
+          <div class="y">2018</div>
+          <div class="h">59h<small>26本 · 88天</small></div>
+          <div class="meta"><b>初入读书</b>，第一年就高产</div>
+          <div class="top-cat">
+            <div class="c"><span>经济理财</span><span>13本</span></div>
+            <div class="c"><span>悬疑推理</span><span>3本</span></div>
+            <div class="c"><span>计算机</span><span>1本</span></div>
+          </div>
+          <div class="top-book"><b>最久之作</b>日本人的活法</div>
+        </div>
+
+        <div class="yd">
+          <div class="y">2019</div>
+          <div class="h">48h<small>56本 · 175天</small></div>
+          <div class="meta"><b>历史与成长</b>开始登场</div>
+          <div class="top-cat">
+            <div class="c"><span>经济理财</span><span>23本</span></div>
+            <div class="c"><span>历史</span><span>6本</span></div>
+            <div class="c"><span>个人成长</span><span>6本</span></div>
+          </div>
+          <div class="top-book"><b>最久之作</b>日本人为何选择了战争</div>
+        </div>
+
+        <div class="yd">
+          <div class="y">2020</div>
+          <div class="h">51h<small>46本 · 180天</small></div>
+          <div class="meta">文学首次<b>超过</b>经管</div>
+          <div class="top-cat">
+            <div class="c"><span>文学</span><span>15本</span></div>
+            <div class="c"><span>历史</span><span>5本</span></div>
+            <div class="c"><span>社会小说</span><span>2本</span></div>
+          </div>
+          <div class="top-book"><b>最久之作</b>盖普眼中的世界</div>
+        </div>
+
+        <div class="yd peak">
+          <div class="y">2021</div>
+          <div class="h">45h<small>26本 · 139天</small></div>
+          <div class="meta"><b>321条笔记</b> 最深一年</div>
+          <div class="top-cat">
+            <div class="c"><span>经济理财</span><span>6本</span></div>
+            <div class="c"><span>文学</span><span>7本</span></div>
+            <div class="c"><span>人物传记</span><span>2本</span></div>
+          </div>
+          <div class="top-book"><b>最久之作</b>解密 Instagram</div>
+        </div>
+
+        <div class="yd">
+          <div class="y">2022</div>
+          <div class="h">19h<small>14本 · 72天</small></div>
+          <div class="meta"><b>政治军事</b>首次居首</div>
+          <div class="top-cat">
+            <div class="c"><span>政治军事</span><span>1本</span></div>
+            <div class="c"><span>经济理财</span><span>3本</span></div>
+            <div class="c"><span>社会文化</span><span>1本</span></div>
+          </div>
+          <div class="top-book"><b>最久之作</b>可能性的艺术</div>
+        </div>
+
+        <div class="yd dim">
+          <div class="y">2023</div>
+          <div class="h">3h<small>23本 · 23天</small></div>
+          <div class="meta"><b>断崖式沉默</b> 仅7条笔记</div>
+          <div class="top-cat">
+            <div class="c"><span>人物传记</span><span>2本</span></div>
+            <div class="c"><span>哲学宗教</span><span>2本</span></div>
+            <div class="c"><span>经济理财</span><span>7本</span></div>
+          </div>
+          <div class="top-book"><b>最久之作</b>— 碎片化阅读</div>
+        </div>
+
+        <div class="yd">
+          <div class="y">2024</div>
+          <div class="h">16h<small>14本 · 37天</small></div>
+          <div class="meta">在<b>历史与心理</b>间徘徊</div>
+          <div class="top-cat">
+            <div class="c"><span>历史</span><span>2本</span></div>
+            <div class="c"><span>心理</span><span>1本</span></div>
+            <div class="c"><span>文学</span><span>2本</span></div>
+          </div>
+          <div class="top-book"><b>最久之作</b>太白金星有点烦</div>
+        </div>
+
+        <div class="yd">
+          <div class="y">2025</div>
+          <div class="h">7h<small>16本 · 12天</small></div>
+          <div class="meta">读<b>《以日为鉴》</b>衰退指南</div>
+          <div class="top-cat">
+            <div class="c"><span>恐怖惊悚</span><span>1本</span></div>
+            <div class="c"><span>女性小说</span><span>1本</span></div>
+            <div class="c"><span>文学</span><span>3本</span></div>
+          </div>
+          <div class="top-book"><b>最久之作</b>以日为鉴 · 衰退时代生存指南</div>
+        </div>
+
+        <div class="yd dim">
+          <div class="y">2026</div>
+          <div class="h">1h<small>2本 · 4天</small></div>
+          <div class="meta">至五月仍极少打开</div>
+          <div class="top-cat">
+            <div class="c"><span>文学</span><span>1本</span></div>
+            <div class="c"><span>—</span><span>—</span></div>
+            <div class="c"><span>—</span><span>—</span></div>
+          </div>
+          <div class="top-book"><b>最久之作</b>苹果公司在中国</div>
+        </div>
+      </div>
+
+      <div class="pull-quote">
+        分类的变化不只是兴趣的变化，是<em>他问自己的方式</em>在变：<br>
+        2018-19 的经济，是想搞懂世界怎么运转；<br>
+        2020-21 的心理、文学、产品方法，是用工具回头问自己；<br>
+        2022 的政治哲学，是想搞懂自己所处的秩序；<br>
+        2023 之后笔记骤减而私密大增——他和自己说了很多，但<em>不想被听见</em>。
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== 04 · 节律 ===== -->
+  <section id="s4">
+    <div class="sec-head reveal">
+      <span class="sec-num">04 · Rhythm</span>
+      <h2 class="sec-title">脾性与节律</h2>
+      <p class="sec-sub">分类 · 作者 · 一日 24 小时的阅读时段</p>
+    </div>
+
+    <div class="body-text reveal">
+      <div class="two">
+        <div class="panel">
+          <h3>偏好分类</h3>
+          <div class="cat-row"><span class="name">经济理财</span><span class="bar"><span class="fill" style="width:100%"></span></span><span class="val">137h</span></div>
+          <div class="cat-row"><span class="name">人物传记</span><span class="bar"><span class="fill" style="width:38%"></span></span><span class="val">51h</span></div>
+          <div class="cat-row"><span class="name">文学散文</span><span class="bar"><span class="fill" style="width:34%"></span></span><span class="val">47h</span></div>
+          <div class="cat-row"><span class="name">个人成长</span><span class="bar"><span class="fill" style="width:18%"></span></span><span class="val">25h</span></div>
+          <div class="cat-row"><span class="name">历史政治</span><span class="bar"><span class="fill" style="width:16%"></span></span><span class="val">21h</span></div>
+          <div class="cat-row"><span class="name">社会小说</span><span class="bar"><span class="fill" style="width:12%"></span></span><span class="val">17h</span></div>
+          <div class="cat-row"><span class="name">心理哲学</span><span class="bar"><span class="fill" style="width:12%"></span></span><span class="val">16h</span></div>
+          <div class="cat-row"><span class="name">悬疑推理</span><span class="bar"><span class="fill" style="width:6%"></span></span><span class="val">7h</span></div>
+        </div>
+        <div class="panel">
+          <h3>偏好作者</h3>
+          <div class="cat-row"><span class="name">艾萨克森</span><span class="bar"><span class="fill" style="width:100%"></span></span><span class="val">33h</span></div>
+          <div class="cat-row"><span class="name">卡尼曼</span><span class="bar"><span class="fill" style="width:43%"></span></span><span class="val">14h</span></div>
+          <div class="cat-row"><span class="name">皮耶鲁齐</span><span class="bar"><span class="fill" style="width:33%"></span></span><span class="val">11h</span></div>
+          <div class="cat-row"><span class="name">西奥迪尼</span><span class="bar"><span class="fill" style="width:32%"></span></span><span class="val">10h</span></div>
+          <div class="cat-row"><span class="name">加藤阳子</span><span class="bar"><span class="fill" style="width:30%"></span></span><span class="val">10h</span></div>
+          <div class="cat-row"><span class="name">达利欧</span><span class="bar"><span class="fill" style="width:28%"></span></span><span class="val">9h</span></div>
+          <div class="cat-row"><span class="name">俞军</span><span class="bar"><span class="fill" style="width:26%"></span></span><span class="val">8h</span></div>
+          <div class="cat-row"><span class="name">张宏杰</span><span class="bar"><span class="fill" style="width:22%"></span></span><span class="val">7h</span></div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:18px">
+        <h3>一日 24 小时 · 他的阅读节律</h3>
+        <div class="hours" id="hours"></div>
+        <div class="hr-lbl">
+          <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span>
+          <span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+          <span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+          <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+        </div>
+        <p style="margin-top:18px;color:var(--ink-3);font-size:13px;text-align:center;font-family:'Noto Sans SC',sans-serif">
+          峰值在 <em style="color:var(--accent);font-style:normal;font-weight:500">21 时</em>，其次是 <em style="color:var(--accent);font-style:normal;font-weight:500">凌晨 0 时</em>。<br>
+          白昼属于工作，夜深方有读处。
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== 05 · 思想切片 ===== -->
+  <section id="s5">
+    <div class="sec-head reveal">
+      <span class="sec-num">05 · Fragments</span>
+      <h2 class="sec-title">思想切片</h2>
+      <p class="sec-sub">681 条笔记中的 12 段 · 由他亲手划下、亲手写下</p>
+    </div>
+
+    <div class="body-text reveal">
+      <p class="lead">这些不是公共的"金句"，而是他亲手划下、亲手写下的痕迹。把它们拼在一起，能看到他没有主动说出来的一面。</p>
+
+      <div class="quote-wall">
+        <div class="qcard gold">
+          <div class="src">解密 INSTAGRAM · 2021.03</div>
+          <div class="q">斯特罗姆告诉公关团队，他想向媒体承认，Stories 是 Instagram 抄袭 Snapchat——这就是为什么他们有着相同的名字。</div>
+          <div class="when">关键词 · 诚实 · 互联网政治</div>
+        </div>
+
+        <div class="qcard">
+          <div class="src">倦怠社会 · 2021.05</div>
+          <div class="q">导致抑郁症和最终精力枯竭的原因在于，过度紧张的、过量的、自恋式自我指涉，这种自我关注带有自我毁灭的性质。疲惫的、抑郁的功绩主体在不断地消耗自我。</div>
+          <div class="when">关键词 · 功绩主体 · 自我攻击</div>
+        </div>
+
+        <div class="qcard gold">
+          <div class="src">俞军产品方法论 · 2021.12</div>
+          <div class="q">投射偏误：不自觉地以为他人和自己有相似的情感、思想与价值观。素朴实在论：相信所见所闻即是真相。控制错觉：高估自己对外在事件的影响力。</div>
+          <div class="when">关键词 · 认知偏差 · 自警</div>
+        </div>
+
+        <div class="qcard jade">
+          <div class="src">人的疆域 · 2021.03</div>
+          <div class="q">人们必须要在受到威胁的生命中寻找自己的道德标准，只要认定它是对的，就不要害怕任何后果。按他人的生活经验指导自己的生命毫无意义。</div>
+          <div class="when">关键词 · 道德主体 · 不依赖</div>
+        </div>
+
+        <div class="qcard gold">
+          <div class="src">俞军产品方法论 · 2022.01</div>
+          <div class="q">大部分人是有限理性的，有很强的立场认知偏误，仅仅增加认同感就能让对方更容易接受你的意见。在产品决策的小处多认可他，只在大处坚持自我立场。</div>
+          <div class="when">关键词 · 组织博弈 · 抓大放小</div>
+        </div>
+
+        <div class="qcard indigo">
+          <div class="src">被讨厌的勇气 · 2020.11</div>
+          <div class="q">如果想要行使自由，那就需要付出代价。而在人际关系中，自由的代价就是被别人讨厌。</div>
+          <div class="when">关键词 · 自由 · 课题分离</div>
+        </div>
+
+        <div class="qcard">
+          <div class="src">可能性的艺术 · 2022.08</div>
+          <div class="q">人们放弃自由的时候从来不是因为热爱专制这种"恶"，而是因为人们在热爱自由的同时相信有更高的善值得追求——比如平等、比如正义、比如面包、比如救亡。</div>
+          <div class="when">关键词 · 自由的代价 · 善的层级</div>
+        </div>
+
+        <div class="qcard thought">
+          <div class="src">他的想法 · 可能性的艺术 · 2022.09</div>
+          <div class="q">读这段是真心痛</div>
+          <div class="when">六个字 · 一段时间</div>
+        </div>
+
+        <div class="qcard indigo">
+          <div class="src">被讨厌的勇气 · 2020.11</div>
+          <div class="q">自我接纳是指假如做不到就诚实地接受这个"做不到的自己"，然后尽量朝着能够做到的方向去努力，不对自己撒谎。</div>
+          <div class="when">关键词 · 诚实 · 不撒谎的自己</div>
+        </div>
+
+        <div class="qcard gold">
+          <div class="src">可能性的艺术 · 2022.09</div>
+          <div class="q">邪恶的上演并不需要多少真正的"坏人"，只需要金字塔顶端的导演，和无数略微有点"近视"的普通人——就盯着眼前这一张办公桌、这一节车厢、这一张表格。</div>
+          <div class="when">关键词 · 平庸的恶 · 大图景</div>
+        </div>
+
+        <div class="qcard jade">
+          <div class="src">倦怠社会 · 2021.05</div>
+          <div class="q">愤怒是一种能力，它能够中断一种状态，从而开始一个新的状态。如今，愤怒越来越让位于生气或不快，后两者却没有能力引发决定性的改变。</div>
+          <div class="when">关键词 · 愤怒的能力 · 改变</div>
+        </div>
+
+        <div class="qcard thought">
+          <div class="src">他的想法 · 可能性的艺术 · 2022.08</div>
+          <div class="q">民主的本质</div>
+          <div class="when">四个字 · 一个判断</div>
+        </div>
+      </div>
+
+      <div class="pull-quote">
+        从十二条划线和想法看，关键词集中在：<em>认知偏差 · 自由 · 自我接纳 · 平庸的恶 · 功绩主体</em>。<br>
+        这些主题跨越产品方法、心理、政治三类书，集中出现在 2020-2022；2023 之后笔记骤减，<em>近三年几乎没有新的思想痕迹</em>留下。
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== 06 · 书架 ===== -->
+  <section id="s6">
+    <div class="sec-head reveal">
+      <span class="sec-num">06 · Shelf</span>
+      <h2 class="sec-title">书架上的灯塔</h2>
+      <p class="sec-sub">六本置顶 · 与笔记最深的几本</p>
+    </div>
+
+    <div class="body-text reveal">
+      <p>置顶的六本，是他愿意一次次回看的方向：宏观秩序、产品方法、文学慰藉、历史思辨。</p>
+
+      <div class="books-grid">
+        <div class="bk"><div class="ti">置身事内</div><div class="au">兰小欢 · 政治经济</div><a href="weread://reading?bId=40055543">阅读 →</a></div>
+        <div class="bk"><div class="ti">李光耀观天下</div><div class="au">李光耀 · 政治家自述</div><a href="weread://reading?bId=3300076264">阅读 →</a></div>
+        <div class="bk"><div class="ti">柏青哥</div><div class="au">李敏金 · 移民史诗</div><a href="weread://reading?bId=30180143">阅读 →</a></div>
+        <div class="bk"><div class="ti">可能性的艺术</div><div class="au">刘瑜 · 比较政治学</div><a href="weread://reading?bId=3300016646">阅读 →</a></div>
+        <div class="bk"><div class="ti">俞军产品方法论</div><div class="au">俞军 · 产品哲学</div><a href="weread://reading?bId=28165041">阅读 →</a></div>
+        <div class="bk"><div class="ti">太白金星有点烦</div><div class="au">马伯庸 · 古意新解</div><a href="weread://reading?bId=3300072295">阅读 →</a></div>
+      </div>
+
+      <h3 style="font-size:18px;color:var(--ink);margin:48px 0 8px;font-weight:600">笔记最深的几本</h3>
+      <p style="color:var(--ink-3);font-size:14px;margin-bottom:8px;font-family:'Noto Sans SC',sans-serif">笔记数即与一本书拉扯的强度</p>
+      <div class="tags">
+        <span class="tag hi">解密 Instagram · 120</span>
+        <span class="tag hi">俞军产品方法论 · 65</span>
+        <span class="tag">人的疆域 · 58</span>
+        <span class="tag">被讨厌的勇气 · 26</span>
+        <span class="tag">运营之光 · 26</span>
+        <span class="tag">倦怠社会 · 23</span>
+        <span class="tag">可能性的艺术 · 20</span>
+        <span class="tag">事实 · 17</span>
+        <span class="tag">成事 · 17</span>
+        <span class="tag">流量池 · 17</span>
+        <span class="tag">产品经理20课 · 16</span>
+        <span class="tag">法治的细节 · 13</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== 07 · 关于他的六个观察 ===== -->
+  <section id="s7">
+    <div class="sec-head reveal">
+      <span class="sec-num">07 · Reading between the lines</span>
+      <h2 class="sec-title">关于他的六个观察</h2>
+      <p class="sec-sub">由划线原文 · 阅读时段 · 加入书架但未读的书 反推得出</p>
+    </div>
+
+    <div class="body-text reveal">
+
+      <div class="persona-list">
+
+        <div class="pers">
+          <div class="num">01</div>
+          <h3>用工具书在问存在的问题</h3>
+          <p>书架上摆着俞军、达利欧、卡尼曼、乔布斯，看起来是一份方法论清单。但他实际划下来的句子集中在另一组词——<em>投射偏误、控制错觉、被别人讨厌的代价、自由的代价</em>。这种"所读"与"所划"的落差稳定地存在了八年：表面在学怎么<b>做事</b>，里面一直在问怎么<b>做自己</b>。</p>
+        </div>
+
+        <div class="pers">
+          <div class="num">02</div>
+          <h3>未赴之约</h3>
+          <p>488 本中读完仅 55 本，<em>11.3% 的完成率</em>。这并不像是懒——加书架的动作太频繁、太规律，更像是不断给"未来某个想读的自己"许下承诺。承诺加得越多，那个未来反而越远。书架上的 433 本未读，是 433 次未兑现的约定。</p>
+        </div>
+
+        <div class="pers">
+          <div class="num">03</div>
+          <h3>不写，但划</h3>
+          <p>他自己写下的想法极少。最长的一句是 <em>"读这段是真心痛"</em>（六个字），另一句是 <em>"民主的本质"</em>（四个字）。但他认真挑出 658 条别人的句子，让它们替自己说话——愿意承认这些是自己想说的，却不愿意亲口说出来。一种<em>不暴露的诚实</em>。</p>
+        </div>
+
+        <div class="pers">
+          <div class="num">04</div>
+          <h3>2021 年的一次集中</h3>
+          <p>那一年只读 26 本，却留下 321 条笔记——八年中笔记密度最高的 12 个月。《俞军产品方法论》《解密 Instagram》《人的疆域》《倦怠社会》《被讨厌的勇气》集中出现在这一年。这是他与自己之间最长、最连贯的一次对话。<em>之后再没有发生过同样密度的事</em>。</p>
+        </div>
+
+        <div class="pers">
+          <div class="num">05</div>
+          <h3>在读别人怎么穿过去</h3>
+          <p>2023 起阅读量下降 82%，笔记几乎归零。但书架仍在增长——最近加入的几本是《以日为鉴：衰退指南》《埃隆之书》《重组与突破》《告别百年激进》《苹果公司在中国》。这些书的共同主题是<em>衰退、转型、沦陷</em>。他不再写下自己的话，但他在读别人怎么穿过类似的处境。</p>
+        </div>
+
+        <div class="pers">
+          <div class="num">06</div>
+          <h3>越来越不留下痕迹</h3>
+          <p>2018：24 本，<em>0 本私密</em>。<br>2025：20 本中 <em>14 本私密</em>。<br>2026：6 本中 <em>5 本私密</em>。<br>这不是逃避，更像一种克制——<em>先和自己说完，再决定要不要说给别人</em>。同时也是一个信号：他身边能接住这些书的人，可能正在变少。</p>
+        </div>
+
+      </div>
+
+      <div class="pull-quote" style="margin-top:40px">
+        把这六件事并置：<em>他在用别人写下的句子，处理一段不太想说的时间</em>。<br>
+        阅读对他不是博览，而是一种克制的、不太被看见的、与自己保持对话的方式——八年里，这种方式一直在持续。
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== 08 · 过去 · 现在 · 之后 ===== -->
+  <section id="s8">
+    <div class="sec-head reveal">
+      <span class="sec-num">08 · Coda</span>
+      <h2 class="sec-title">过去 · 现在 · 之后</h2>
+      <p class="sec-sub">把八年的数据压成三段</p>
+    </div>
+
+    <div class="body-text reveal">
+      <div class="poem-wrap">
+        <div class="poem">
+
+          <div class="stanza">
+            <span class="head">2018 — 2021 · 过 去</span>
+            他从工具书入场——经济、产品、心理、影响力。<br>
+            读得多而杂，像是在测量这个世界的边界。<br>
+            2021 年完成了一次转向：书读得更慢，笔记反而更密。<br>
+            那一年 26 本书写下 321 条笔记，<br>
+            读的已经不是世界，<em>是世界在他身上留下的回声</em>。
+          </div>
+
+          <div class="stanza">
+            <span class="head">2022 — 2026 · 现 在</span>
+            此后是长达四年的退潮。<br>
+            阅读量降至高峰的两成，笔记几乎归零。<br>
+            但加书的动作没有停下——<br>
+            新加入的几本是 <em>衰退、转型、沦陷</em>，<br>
+            他在用别人的语言处理自己的处境。<br>
+            私密阅读占比从 0 升到近 80%，<br>
+            读书的方式从"留下痕迹"，变成"不留痕迹"。
+          </div>
+
+          <div class="stanza">
+            <span class="head">之 后</span>
+            书架上还有 433 本未读，<br>
+            构成一份未兑现的承诺池。<br>
+            它们也许永远只是承诺。<br>
+            但这八年的痕迹已经写清楚一件事——<br>
+            对他而言，阅读不是积累，不是完成，不是被看见，<br>
+            而是 <em>在那些没人听的时刻，仍能与自己持续说话</em> 的方式。
+          </div>
+
+        </div>
+        <div class="sig">数据来源 · 微信读书 · 2018.01.14 — 2026.05.21</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 09 · 方法 ===== -->
+  <section id="s9">
+    <div class="sec-head reveal">
+      <span class="sec-num">09 · Method</span>
+      <h2 class="sec-title">评估方法与可复用模板</h2>
+      <p class="sec-sub">这份画像是怎么写的 · 以及如何为自己写一份</p>
+    </div>
+
+    <div class="body-text reveal">
+
+      <div class="method-intro">
+        <h4>评估者身份</h4>
+        <p>这份画像由 <em>Claude（一个 AI 第三者）</em> 撰写。它<em>不是</em>画像主人公本人，也<em>不是</em>他的朋友或粉丝。它的位置接近一个有距离感的观察员——能调用数据、能下判断、不寻求亲昵，也不寻求被认同。所有解读都从可指认的数据点出发，不替主人公美化，也不替主人公贬低。</p>
+      </div>
+
+      <ol class="rules">
+        <li>
+          <b>数据先于解读</b>
+          <span>先摆事实，再做判断。任何带洞察的句子，背后必须能指向具体的数据点（某个数字、某条划线、某个时间戳）。</span>
+        </li>
+        <li>
+          <b>不和外部基准比</b>
+          <span>不引入"全国均值""平台均值"这类外部尺度。读书是私人的事，画像的价值不来自竞技排名。</span>
+        </li>
+        <li>
+          <b>区分三层</b>
+          <span>"加书架的书" 是想成为的样子，"读完的书" 是实际走完的路，"留下笔记的书" 才是真正发生关系的密度。三者之间的差异，本身就是画像。</span>
+        </li>
+        <li>
+          <b>看落差，不只看绝对值</b>
+          <span>所读 vs 所划 vs 所写——这三者之间的不一致，比任何单一数据点都更说明问题。</span>
+        </li>
+        <li>
+          <b>看节奏的变化</b>
+          <span>哪一年最密、哪一年沉默、什么时候开始私密化——节奏的转折比平均数更能透露真实状态。</span>
+        </li>
+        <li>
+          <b>看未读书架</b>
+          <span>未读的书是没说出口的话。未读书架的主题往往透露当下的关切，也是关于自己的承诺池。</span>
+        </li>
+        <li>
+          <b>不无病呻吟</b>
+          <span>允许有判断、允许有诗意，但每一句煽情都必须从具体数据点长出来。"少年握书如握刃" 这类与数据无关的英雄化不被采用。</span>
+        </li>
+        <li>
+          <b>第三人称</b>
+          <span>用"他"或"她"，不用"你"。这是评估和画像，不是对话和情书。AI 评估者不应该和主人公"打招呼"。</span>
+        </li>
+        <li>
+          <b>不下道德判断</b>
+          <span>不说"读得多" "读得少" "完成率高/低" 是好或不好。只描述模式，不评价价值。</span>
+        </li>
+        <li>
+          <b>承认盲区</b>
+          <span>数据看不到生活。诚实地标注哪些是数据直接揭示的、哪些是合理推断、哪些是数据看不到的——比如 2023 年阅读骤降的具体原因。</span>
+        </li>
+      </ol>
+
+      <div class="blind-spot">
+        <h4>这份画像看不到的</h4>
+        <p>数据只覆盖了「微信读书 App 内的阅读行为」。它看不到他读的纸书、PDF、微信文章、博客、播客；看不到他和朋友讨论过的书；也看不到他读书背后真正发生的事——升职、离职、搬家、亲人、孩子、健康。<em>所有"为什么"都是推断，不是事实。</em></p>
+      </div>
+
+      <h3 style="font-family:'Noto Serif SC',serif;font-size:24px;color:var(--ink);margin:56px 0 14px;font-weight:600;letter-spacing:-.3px">为自己生成一份画像</h3>
+
+      <div class="setup-box">
+        <div class="setup-row">
+          <span class="setup-num">1</span>
+          <div class="setup-content">
+            <div class="setup-title">安装 weread-skills</div>
+            <a class="setup-link" href="https://weread.qq.com/r/weread-skills" target="_blank" rel="noopener">weread.qq.com/r/weread-skills <span class="arrow">↗</span></a>
+            <div class="setup-desc">微信读书官方发布的 AI Skill，提供搜索、书架、笔记、阅读统计等接口</div>
+          </div>
+        </div>
+        <div class="setup-row">
+          <span class="setup-num">2</span>
+          <div class="setup-content">
+            <div class="setup-title">设置 API Key</div>
+            <code class="setup-code">export WEREAD_API_KEY=wrk-xxxxxxxx</code>
+            <div class="setup-desc">在 skill 主页申请并写入 ~/.zshrc 或 ~/.bashrc</div>
+          </div>
+        </div>
+        <div class="setup-row">
+          <span class="setup-num">3</span>
+          <div class="setup-content">
+            <div class="setup-title">复制下方 prompt</div>
+            <div class="setup-desc">粘贴到 Claude Code 或其他能调用 weread-skills 的 AI 助手，它会按本页同样的方法为你生成一份</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="label">prompt · ready to copy</span>
+          <button class="copy-btn" id="copyPromptBtn" onclick="copyPrompt()">
+            <span id="copyText">复制</span>
+          </button>
+        </div>
+<div class="prompt-body" id="promptBody"><strong># 前置条件</strong>
+- 安装 weread-skills（官方地址：https://weread.qq.com/r/weread-skills）
+- 在环境变量中设置 WEREAD_API_KEY（格式 wrk-xxxxxxxx，从 skill 主页申请）
+
+<strong># 角色</strong>
+你是一个细心的、有距离感的 AI 第三者评估者。你不是用户本人，也不是他的粉丝。你的任务是基于微信读书的 8 年数据，为用户生成一份私人的读书画像 HTML——给用户自己看，也给他的朋友看。
+
+<strong># 数据采集</strong>
+通过 weread-skills 调用以下接口（每次请求都要带 skill_version）：
+1. <em>/shelf/sync</em> — 获取全部书架（含 books, albums, mp, isTop, secret, finishReading, readUpdateTime, category）
+2. <em>/readdata/detail</em> — mode=overall 拿总览；再按每个年份分别传 baseTime（年中的时间戳），mode=annually，覆盖用户注册以来的每一年
+3. <em>/user/notebooks</em> — 获取所有有笔记的书的概览（count=200，必要时翻页）
+4. 选出笔记数 (reviewCount + noteCount + bookmarkCount) 最多的 5-7 本，对每本分别调用：
+   - <em>/book/bookmarklist</em>（划线原文）
+   - <em>/review/list/mine</em>（用户写下的个人想法/点评）
+
+把所有 JSON 保存到本地 data/ 目录归档。
+
+<strong># 评估原则（必须严格遵守）</strong>
+1. 数据先于解读——任何带判断的句子，背后必须能指向具体数据点
+2. 不和外部基准比——禁止引入"全国均值""平台均值"等外部尺度
+3. 区分"加书架/读完/留下笔记"三层
+4. 看落差——所读 vs 所划 vs 所写
+5. 看节奏的变化——哪年最密、哪年沉默、何时开始私密化
+6. 看未读书架的主题——它揭示当下的关切
+7. 不无病呻吟——煽情必须从数据长出来，不要"少年握书如握刃"式英雄化
+8. 用第三人称"他/她"，不要"你"——这是画像，不是对话
+9. 不下道德判断——不说读得多/少/好/坏，只描述模式
+10. 承认盲区——明确标注数据看不到的部分
+
+<strong># 输出</strong>
+单文件 HTML，简洁现代风格（不要纸质书拟物），移动端兼容。包含以下章节：
+- 01 · 核心数据（8 项 stat）
+- 02 · 八年起伏（年度柱状图 + 月度热力图 + 心路时间线）
+- 03 · 口味漂移（按年的偏好分类卡片）
+- 04 · 偏好节律（分类、作者、24 小时阅读时段）
+- 05 · 思想切片（精选 10-12 条划线 + 用户自己写下的想法）
+- 06 · 书架灯塔（置顶书 + 笔记最深的 12 本）
+- 07 · 关于他/她的 6 个观察（用工具书在问存在的问题/未赴之约/不写但划/某年的一次集中/在读别人怎么穿过去/越来越不留下痕迹 等模式，根据实际数据调整）
+- 08 · 过去 · 现在 · 之后（三段总结，可以有诗的节奏，但每一句煽情都必须站得住）
+- 09 · 方法（公开本评估的视角、10 条原则、本段 prompt）
+
+视觉：暖白底（#faf8f3）+ 深墨字（#1a1816）+ 一个克制的朱红强调色（#b8453a）+ Noto Serif SC + Lora Italic。卡片用 1px 浅灰边框 + 小圆角。不要纸张噪点纹理、不要烫金角花。
+
+<strong># 调性</strong>
+克制、精确、像韩炳哲的判断 + 刘瑜的清醒 + 阿德勒的直白。可以下判断，但不能滥情。可以指出沉默和退潮，但不评价沉默是好是坏。</div>
+      </div>
+
+      <p style="color:var(--ink-3);font-size:13px;margin-top:18px;font-family:'Noto Sans SC',sans-serif;line-height:1.7">复制后粘贴到 Claude Code 中开始对话。AI 会先连接微信读书接口拉取数据，再按本页同样的结构和原则生成 HTML。生成出来的画像不会和这一份完全相同——它取决于你 8 年读了什么、留下了什么。</p>
+
+    </div>
+  </section>
+
+  <div class="colophon">
+    <div>DATA · WEREAD · 2018.01.14 — 2026.05.21</div>
+    <div class="line2">488 books · 681 notes · 1041 days</div>
+    <div class="line2" style="margin-top:8px">portrait by Claude · a third-party AI evaluator</div>
+    <a class="repo-link" href="https://github.com/viewer12/weread-mirror" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2.02c-3.34.72-4.04-1.61-4.04-1.61-.55-1.4-1.34-1.77-1.34-1.77-1.08-.75.08-.73.08-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .31.21.7.82.58A12 12 0 0 0 12 .3"/></svg>
+      view source on github
+    </a>
+  </div>
+
+</div>
+
+<script>
+  // ===== Progress bar =====
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', ()=>{
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    progress.style.width = (h.scrollTop / max * 100) + '%';
+  }, {passive:true});
+
+  // ===== Top nav active state =====
+  const navLinks = document.querySelectorAll('.topnav a');
+  navLinks.forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const t = document.getElementById(a.dataset.target);
+      if(t){
+        const top = t.offsetTop - 60;
+        window.scrollTo({top, behavior:'smooth'});
+      }
+    });
+  });
+  const sections = document.querySelectorAll('section[id]');
+  const navUpdate = ()=>{
+    let active = '';
+    sections.forEach(s=>{
+      const r = s.getBoundingClientRect();
+      if(r.top < window.innerHeight*0.4 && r.bottom > 100) active = s.id;
+    });
+    navLinks.forEach(a=>a.classList.toggle('active', a.dataset.target===active));
+    // scroll active link into view on mobile
+    const activeEl = document.querySelector('.topnav a.active');
+    if(activeEl && window.innerWidth < 640){
+      const tn = document.querySelector('.topnav');
+      const r = activeEl.getBoundingClientRect();
+      const tr = tn.getBoundingClientRect();
+      if(r.left < tr.left + 60 || r.right > tr.right - 60){
+        tn.scrollTo({left: activeEl.offsetLeft - tr.width/2 + r.width/2, behavior:'smooth'});
+      }
+    }
+  };
+  window.addEventListener('scroll', navUpdate, {passive:true});
+
+  // ===== Reveal on scroll =====
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ===== Animate fills when visible =====
+  const ioFills = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.cat-row').forEach((r,i)=>setTimeout(()=>r.classList.add('in'), i*60));
+        ioFills.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.3});
+  document.querySelectorAll('.panel').forEach(p=>ioFills.observe(p));
+
+  // ===== 24h bars =====
+  const seconds = [0,0,6470,17814,327,3453,3870,11609,3104,4707,2010,6917,7192,4334,6667,27107,12072,5803,15756,7883,201,0,0,0];
+  const maxS = Math.max(...seconds);
+  const hc = document.getElementById('hours');
+  seconds.forEach((s,i)=>{
+    const d = document.createElement('div');
+    d.className = 'hr' + (s >= maxS*0.55 ? ' peak' : '');
+    d.style.height = Math.max(2, Math.round((s/maxS)*100)) + '%';
+    d.title = `${(6+i)%24}时 · ${Math.round(s/60)}分钟`;
+    hc.appendChild(d);
+  });
+  const ioHours = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        hc.querySelectorAll('.hr').forEach((b,i)=>setTimeout(()=>b.classList.add('in'), i*30));
+        ioHours.unobserve(hc);
+      }
+    });
+  }, {threshold:0.3});
+  ioHours.observe(hc);
+
+  // ===== Heatmap =====
+  const heatmap = {"2018-01":11923,"2018-04":11086,"2018-05":10135,"2018-06":13778,"2018-07":7593,"2018-08":48289,"2018-10":10162,"2018-11":48528,"2018-12":51066,
+    "2019-02":16591,"2019-03":12937,"2019-04":19498,"2019-05":16557,"2019-06":12302,"2019-07":4254,"2019-08":12239,"2019-09":2235,"2019-10":28932,"2019-11":10221,"2019-12":36658,
+    "2020-01":9712,"2020-02":11888,"2020-03":46140,"2020-04":9466,"2020-05":28800,"2020-06":8205,"2020-07":4314,"2020-08":4137,"2020-09":10764,"2020-10":6611,"2020-11":17329,"2020-12":26396,
+    "2021-01":24962,"2021-02":4257,"2021-03":41281,"2021-04":1100,"2021-05":9322,"2021-06":1719,"2021-07":6125,"2021-08":6602,"2021-09":14400,"2021-10":14801,"2021-11":5274,"2021-12":31938,
+    "2022-01":16097,"2022-03":367,"2022-04":7320,"2022-05":3702,"2022-07":6429,"2022-08":19302,"2022-09":10764,"2022-10":3667,
+    "2023-02":266,"2023-09":7200,"2023-12":2167,
+    "2024-04":1219,"2024-05":11210,"2024-06":11651,"2024-07":3656,"2024-08":21274,"2024-10":274,"2024-11":9395,
+    "2025-02":227,"2025-06":603,"2025-08":4892,"2025-09":13983,"2025-11":1747,"2025-12":4711,
+    "2026-01":4182};
+
+  const hmEl = document.getElementById('hm');
+  const hd0 = document.createElement('div'); hd0.className='hd'; hmEl.appendChild(hd0);
+  for(let m=1;m<=12;m++){
+    const c = document.createElement('div'); c.className='hd'; c.textContent=String(m).padStart(2,'0'); hmEl.appendChild(c);
+  }
+  const lev = s=>{
+    const h = s/3600;
+    if (h<0.1) return 0;
+    if (h<2) return 1;
+    if (h<5) return 2;
+    if (h<10) return 3;
+    if (h<14) return 4;
+    return 5;
+  };
+  for(let y=2018;y<=2026;y++){
+    const yl = document.createElement('div'); yl.className='yl'; yl.textContent=y; hmEl.appendChild(yl);
+    for(let m=1;m<=12;m++){
+      const k = `${y}-${String(m).padStart(2,'0')}`;
+      const s = heatmap[k] || 0;
+      const cell = document.createElement('div'); cell.className='hm-cell';
+      cell.setAttribute('data-v', lev(s));
+      cell.title = `${k} · ${(s/3600).toFixed(1)}h`;
+      if (s/3600 >= 10) cell.textContent = Math.round(s/3600);
+      hmEl.appendChild(cell);
+    }
+  }
+
+  // ===== Copy prompt button =====
+  window.copyPrompt = function(){
+    const text = document.getElementById('promptBody').innerText;
+    const btn = document.getElementById('copyPromptBtn');
+    const span = document.getElementById('copyText');
+    navigator.clipboard.writeText(text).then(()=>{
+      span.textContent = '已复制';
+      btn.classList.add('copied');
+      setTimeout(()=>{
+        span.textContent = '复制';
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(()=>{
+      // fallback for older browsers
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); span.textContent = '已复制'; btn.classList.add('copied'); }
+      catch(e){ span.textContent = '复制失败'; }
+      document.body.removeChild(ta);
+      setTimeout(()=>{ span.textContent = '复制'; btn.classList.remove('copied'); }, 2000);
+    });
+  };
+
+  // ===== Poem stanzas reveal sequentially =====
+  const stanzas = document.querySelectorAll('.poem .stanza');
+  const ioPoem = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        stanzas.forEach((s,i)=>setTimeout(()=>s.classList.add('in'), i*700));
+        ioPoem.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.2});
+  if(stanzas[0]) ioPoem.observe(stanzas[0].parentElement);
+</script>
+</body>
+</html>
